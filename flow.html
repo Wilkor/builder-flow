@@ -20,6 +20,9 @@
       <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" 
       data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><img src="img/json.png" alt="" width="150px"></button>
       
+      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" 
+      data-bs-target="#nav-config" type="button" role="tab" aria-controls="nav-config" aria-selected="false"><img src="img/config.png" alt="" width="100px"></button>
+      
     </div>
   </nav>
   <div class="tab-content" id="nav-tabContent">
@@ -34,8 +37,9 @@
               <div class="col-sm">
                 <div class="form-group">
                   <label for="exampleInputmail"><strong>Estado:</strong></label>
-                  <input class="form-control" type="text" name="estado" value="" placeholder="estado"/>
+                  <select class="form-control"  name="estado" id="selEstado"></select>
                   <div class="form-group"><br>
+
           
                     <div class="container1">
                       <label for="exampleInputmail"><strong>Adicionar Inputs:</strong></label>
@@ -70,10 +74,9 @@
                       <option value="application/vnd.lime.select+json">Menu</option>
                       <option value="text/plain" selected>Texto</option>
                     </select>
-                    <input class="form-control" type="text" name="resposta[][cabecalho]" value=""  placeholder="cabecalho"/>
-                    <input class="form-control" type="text" name="resposta[][opcoesDeMenu]" value=""  placeholder="opcoesDeMenu"/>
-                    <input class="form-control" type="text" name="resposta[][estadoDestino]" value="" placeholder="estadoDestino" />
-                    
+                    <select class="form-control" name="resposta[][cabecalho]" id="selCabecalho-1"></select>
+                    <select class="form-control" name="resposta[][opcoesDeMenu]" id="opcoesDeMenu-1"></select>
+                    <select class="form-control" name="resposta[][estadoDestino]" id="selEstadoDestino-1"></select>
                   </div>
               </div>
               
@@ -88,10 +91,9 @@
                   </select>
                 <input class="form-control" type="text" name="tracking" value="" placeholder="tracking"/>
                 <input class="form-control" type="text" name="time" value="" placeholder="time"/>
-                <input class="form-control" type="text" name="cabecalho" value=""  placeholder="cabecalho"/>
-                <input class="form-control" type="text" name="cabecalhoInvalido" value="" placeholder="cabecalhoInvalido" />
-                <input class="form-control" type="text" name="opcoesDeMenu" value=""  placeholder="opcoesDeMenu"/>
-                <input class="form-control" type="text" name="estadoDestino" value=""  placeholder="estadoDestino"/>
+                <select class="form-control" name="cabecalho" id="selCabecalho2"></select>
+                <select class="form-control" name="opcoesDeMenu" id="opcoesDeMenu2"></select>
+                <select class="form-control" name="estadoDestino" id="selEstadoDestino2"></select>
                 </div><br>
                 <button type="button" class="btn btn-success" onclick="createFlow()">Gerar Flow</button>
                 <button type="button" class="btn btn-danger" onclick="deleteFlow()">Apagar Flow</button>
@@ -108,6 +110,31 @@
 
       </div>
     </div>
+
+    <div class="tab-pane fade" id="nav-config" role="tabpanel" aria-labelledby="nav-profile-tab">
+     
+      <br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <div class="form-group">
+              <label for="exampleInputmail"><strong>Chave do ChatBot:</strong></label>
+              <input class="form-control" type="text" name="key" value="" placeholder="key do bot"/>
+            </div>
+            </div>
+
+            <div class="col-sm">
+               <br>
+              <button type="button" class="btn btn-success" onclick="carregarRecursos()">Carregar Recursos</button>
+      
+            </div>
+
+            </div>
+            </div>
+
+
+    </div>
+
    
   </div>
   

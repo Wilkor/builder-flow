@@ -89,32 +89,42 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
+
+  
   var max_fields = 10;
   var wrapper = $(".container3");
   var add_button = $(".add_form_field_3");
 
   var x = 1;
+  carregarRecursos(x)
+
   $(add_button).click(function(e) {
+      
       e.preventDefault();
       if (x < max_fields) {
-          x++;
-          $(wrapper).append(`<div ><br>
-          <input class="form-control" type="text" name="resposta[][id]" value="${x}"/>
-          <input class="form-control" type="text" name="resposta[][resposta]" value="" placeholder="resposta" />
-          <input class="form-control" type="text" name="resposta[][tracking]" value="" placeholder="tracking" />
-          <input class="form-control" type="text" name="resposta[][time]" value=""  placeholder="time"/>
-          <select class="form-control" name="resposta[][tipo]">
-          <option value="application/vnd.lime.select+json">Menu</option>
-          <option value="text/plain" selected>Texto</option>
+        x++;
+        $(wrapper).append(`<div ><br>
+        <input class="form-control" type="text" name="resposta[][id]" value="${x}"/>
+        <input class="form-control" type="text" name="resposta[][resposta]" value="" placeholder="resposta" />
+        <input class="form-control" type="text" name="resposta[][tracking]" value="" placeholder="tracking" />
+        <input class="form-control" type="text" name="resposta[][time]" value=""  placeholder="time"/>
+        <select class="form-control" name="resposta[][tipo]">
+        <option value="application/vnd.lime.select+json">Menu</option>
+        <option value="text/plain" selected>Texto</option>
         </select>
-          <input class="form-control" type="text" name="resposta[][cabecalho]" value=""  placeholder="cabecalho"/>
-          <input class="form-control" type="text" name="resposta[][opcoesDeMenu]" value=""  placeholder="opcoesDeMenu"/>
-          <input class="form-control" type="text" name="resposta[][estadoDestino]" value="" placeholder="estadoDestino" />
-          <a href="#" class="delete"><img  class="add_form_field"  src="img/dash-circle-fill.svg" width="25px" style="cursor: pointer;"/></a></div>`);
+        <select class="form-control" name="resposta[][cabecalho]" id="selCabecalho-${x}"></select>
+        <select class="form-control" name="resposta[][opcoesDeMenu]" id="opcoesDeMenu-${x}"></select>
+        <select class="form-control" name="resposta[][estadoDestino]" id="selEstadoDestino-${x}"></select>
+        <a href="#" class="delete"><img  class="add_form_field"  src="img/dash-circle-fill.svg" width="25px" style="cursor: pointer;"/></a></div>`);
+        carregarRecursos(x)
       } else {
           alert('chegou ao limite')
       }
+
+      
+      
   });
+
 
   $(wrapper).on("click", ".delete", function(e) {
       e.preventDefault();
@@ -122,3 +132,69 @@ $(document).ready(function() {
       x--;
   })
 });
+
+function carregarRecursos(x) {
+
+  
+
+  let payload = {
+
+    "id":'123',
+    "method": "get",
+    "uri": "/resources?$take=100000"
+    }
+
+  $.ajax({
+    type: "POST",
+    dataType: 'json',
+    url: 'https://http.msging.net/commands',
+    crossDomain: true,
+    async: false,
+    contentType: "application/json; charset=utf-8",
+    beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', 'Key aGFuYWJlYXV0eWNsb25lOld2N3lPNEFMb3dpNVp1dW9mZHVY');
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+        console.log(textStatus);
+
+    },
+    success: function (result) {
+
+    var data = result.resource.items;
+
+    var list = [];
+
+      data.forEach((e, index) => {
+
+       var idx = index + 1;
+
+        list.push({id: idx, name: e})
+
+      })
+
+      
+      list.forEach((e) => {
+      
+        $('#selEstado').append(`<option value="${e.name}">${e.name}</option>`);
+        $(`#selEstadoDestino-${x}`).append(`<option value="${e.name}">${e.name}</option>`);
+        $(`#selEstadoDestino2`).append(`<option value="${e.name}">${e.name}</option>`);
+        $(`#opcoesDeMenu2`).append(`<option value="{{resource.${e.name}}}">{{resource.${e.name}}}</option>`);
+        $(`#selCabecalho2`).append(`<option value="{{resource.${e.name}}}">{{resource.${e.name}}}</option>`);
+        $(`#selCabecalho-${x}`).append(`<option value="{{resource.${e.name}}}">{{resource.${e.name}}}</option>`);
+        $(`#opcoesDeMenu-${x}`).append(`<option value="{{resource.${e.name}}}">{{resource.${e.name}}}</option>`);
+      })
+
+
+ 
+    console.log(list)
+
+    console.log($(`#selCabecalho-${x}`))   
+     
+         
+    },
+    data: JSON.stringify(payload)
+});
+
+console.log('teste')
+
+}
