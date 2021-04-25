@@ -116,7 +116,7 @@ $(document).ready(function() {
         <select class="form-control" name="resposta[][opcoesDeMenu]" id="opcoesDeMenu-${x}"></select>
         <select class="form-control" name="resposta[][estadoDestino]" id="selEstadoDestino-${x}"></select>
         <a href="#" class="delete"><img  class="add_form_field"  src="img/dash-circle-fill.svg" width="25px" style="cursor: pointer;"/></a></div>`);
-        carregarRecursos(x)
+        carregarRecursos('button', x)
       } else {
           alert('chegou ao limite')
       }
@@ -133,9 +133,13 @@ $(document).ready(function() {
   })
 });
 
-function carregarRecursos(x) {
+function carregarRecursos(origin, x) {
 
-  
+  let key = document.getElementById('key').value;
+
+  if(origin != 'button'){
+    x = 1
+  }
 
   let payload = {
 
@@ -152,7 +156,7 @@ function carregarRecursos(x) {
     async: false,
     contentType: "application/json; charset=utf-8",
     beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', 'Key aGFuYWJlYXV0eWNsb25lOld2N3lPNEFMb3dpNVp1dW9mZHVY');
+        xhr.setRequestHeader('Authorization', key);
     },
     error: function (jqXHR, textStatus, errorThrown) {
         console.log(textStatus);
@@ -167,6 +171,10 @@ function carregarRecursos(x) {
       data.forEach((e, index) => {
 
        var idx = index + 1;
+
+       $(`#selEstado option[value=${e}]`).remove();
+       $(`#selEstadoDestino-${x} option[value=${e}]`).remove();
+       $(`#selEstadoDestino2 option[value=${e}]`).remove();
 
         list.push({id: idx, name: e})
 
@@ -183,18 +191,10 @@ function carregarRecursos(x) {
         $(`#selCabecalho-${x}`).append(`<option value="{{resource.${e.name}}}">{{resource.${e.name}}}</option>`);
         $(`#opcoesDeMenu-${x}`).append(`<option value="{{resource.${e.name}}}">{{resource.${e.name}}}</option>`);
       })
-
-
- 
-    console.log(list)
-
-    console.log($(`#selCabecalho-${x}`))   
-     
-         
+    
     },
     data: JSON.stringify(payload)
 });
 
-console.log('teste')
 
 }
