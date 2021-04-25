@@ -103,9 +103,11 @@ $(document).ready(function() {
           <input class="form-control" type="text" name="resposta[][resposta]" value="" placeholder="resposta" />
           <input class="form-control" type="text" name="resposta[][tracking]" value="" placeholder="tracking" />
           <input class="form-control" type="text" name="resposta[][time]" value=""  placeholder="time"/>
-          <input class="form-control" type="text" name="resposta[][tipo]" value=""  placeholder="tipo"/>
+          <select class="form-control" name="resposta[][tipo]">
+          <option value="application/vnd.lime.select+json">Menu</option>
+          <option value="text/plain" selected>Texto</option>
+        </select>
           <input class="form-control" type="text" name="resposta[][cabecalho]" value=""  placeholder="cabecalho"/>
-          <input class="form-control" type="text" name="resposta[][cabecalhoInvalido]" value="" placeholder="cabecalhoInvalido" />
           <input class="form-control" type="text" name="resposta[][opcoesDeMenu]" value=""  placeholder="opcoesDeMenu"/>
           <input class="form-control" type="text" name="resposta[][estadoDestino]" value="" placeholder="estadoDestino" />
           <a href="#" class="delete"><img  class="add_form_field"  src="img/dash-circle-fill.svg" width="25px" style="cursor: pointer;"/></a></div>`);
