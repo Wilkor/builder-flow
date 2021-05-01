@@ -112,7 +112,7 @@ $(document).ready(function() {
         <option value="application/vnd.lime.select+json">Menu</option>
         <option value="text/plain" selected>Texto</option>
         </select>
-        <select class="form-control" name="resposta[][cabecalho]" id="selCabecalho-${x}"></select>
+        <input class="form-control" type="text" name="resposta[][cabecalho]" value=""  placeholder="cabecalho"/>
         <select class="form-control" name="resposta[][opcoesDeMenu]" id="opcoesDeMenu-${x}"></select>
         <select class="form-control" name="resposta[][estadoDestino]" id="selEstadoDestino-${x}"></select>
         <a href="#" class="delete"><img  class="add_form_field"  src="img/dash-circle-fill.svg" width="25px" style="cursor: pointer;"/></a></div>`);
@@ -188,7 +188,6 @@ function carregarRecursos(origin, x) {
         $(`#selEstadoDestino2`).append(`<option value="${e.name}">${e.name}</option>`);
         $(`#opcoesDeMenu2`).append(`<option value="{{resource.${e.name}}}">{{resource.${e.name}}}</option>`);
         $(`#selCabecalho2`).append(`<option value="{{resource.${e.name}}}">{{resource.${e.name}}}</option>`);
-        $(`#selCabecalho-${x}`).append(`<option value="{{resource.${e.name}}}">{{resource.${e.name}}}</option>`);
         $(`#opcoesDeMenu-${x}`).append(`<option value="{{resource.${e.name}}}">{{resource.${e.name}}}</option>`);
       })
     
