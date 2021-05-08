@@ -113,8 +113,15 @@ $(document).ready(function() {
         <option value="text/plain" selected>Texto</option>
         </select>
         <input class="form-control" type="text" name="resposta[][cabecalho]" value=""  placeholder="cabecalho"/>
-        <select class="form-control" name="resposta[][opcoesDeMenu]" id="opcoesDeMenu-${x}"></select>
-        <select class="form-control" name="resposta[][estadoDestino]" id="selEstadoDestino-${x}"></select>
+        <select class="form-control" name="resposta[][opcoesDeMenu]" id="opcoesDeMenu-${x}">
+        <option value="{{resource.pergunta_algo_mais_menu}}">{{resource.pergunta_algo_mais_menu}}
+        </option>
+        </select>
+        <select class="form-control" name="resposta[][estadoDestino]" id="selEstadoDestino-${x}">
+        <option value="nps">nps</option>
+        <option value="pergunta_algo_mais_menu">pergunta_algo_mais_menu</option>
+        <option value="verifica_horario">verifica_horario</option>
+        </select>
         <a href="#" class="delete"><img  class="add_form_field"  src="img/dash-circle-fill.svg" width="25px" style="cursor: pointer;"/></a></div>`);
         carregarRecursos('button', x)
       } else {
