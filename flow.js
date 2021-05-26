@@ -1,4 +1,5 @@
 
+
 function createFlow() {
 
 
@@ -35,6 +36,9 @@ function deleteFlow(){
 }
 
 $(document).ready(function() {
+
+  
+
   var max_fields = 10;
   var wrapper = $(".container1");
   var add_button = $(".add_form_field");
@@ -108,20 +112,30 @@ $(document).ready(function() {
         <input class="form-control" type="text" name="resposta[][resposta]" value="" placeholder="resposta" />
         <input class="form-control" type="text" name="resposta[][tracking]" value="" placeholder="tracking" />
         <input class="form-control" type="text" name="resposta[][time]" value=""  placeholder="time"/>
+
         <select class="form-control" name="resposta[][tipo]">
         <option value="application/vnd.lime.select+json">Menu</option>
         <option value="text/plain" selected>Texto</option>
         </select>
+
         <input class="form-control" type="text" name="resposta[][cabecalho]" value=""  placeholder="cabecalho"/>
-        <select class="form-control" name="resposta[][opcoesDeMenu]" id="opcoesDeMenu-${x}">
-        <option value="{{resource.pergunta_algo_mais_menu}}">{{resource.pergunta_algo_mais_menu}}
-        </option>
-        </select>
-        <select class="form-control" name="resposta[][estadoDestino]" id="selEstadoDestino-${x}">
-        <option value="nps">nps</option>
-        <option value="pergunta_algo_mais_menu">pergunta_algo_mais_menu</option>
-        <option value="verifica_horario">verifica_horario</option>
-        </select>
+
+        <input list="opcoesDeMenu-${x}"  class="form-control"name="resposta[][opcoesDeMenu]" placeholder="Opçoes de Menu">
+        <datalist id="opcoesDeMenu-${x}">
+          <option value="{{resource.pergunta_algo_mais_menu}}">{{resource.pergunta_algo_mais_menu}}
+          </option>
+        </datalist>
+        
+
+        <input list="selEstadoDestino-${x}"  class="form-control" name="resposta[][estadoDestino]" placeholder="Estado destino">
+        <datalist id="selEstadoDestino-${x}">
+          <option value="nps">nps</option>
+          <option value="pergunta_algo_mais_menu">pergunta_algo_mais_menu</option>
+          <option value="verifica_horario">verifica_horario</option>
+          <option value="coringa">coringa</option>
+        </datalist>
+
+
         <a href="#" class="delete"><img  class="add_form_field"  src="img/dash-circle-fill.svg" width="25px" style="cursor: pointer;"/></a></div>`);
         carregarRecursos('button', x)
       } else {
@@ -139,6 +153,7 @@ $(document).ready(function() {
       x--;
   })
 });
+
 
 function carregarRecursos(origin, x) {
 
